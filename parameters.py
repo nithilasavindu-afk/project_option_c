@@ -43,7 +43,7 @@ BIDIRECTIONAL = False
 LOSS = "huber"
 OPTIMIZER = "adam"
 BATCH_SIZE = 64
-EPOCHS = 50
+EPOCHS = 25
 
 # Meta stock market
 ticker = "META"
