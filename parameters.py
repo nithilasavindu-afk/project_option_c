@@ -40,16 +40,16 @@ BIDIRECTIONAL = False
 # mean absolute error loss
 # LOSS = "mae"
 # huber loss
-LOSS = "huber_loss"
+LOSS = "huber"
 OPTIMIZER = "adam"
 BATCH_SIZE = 64
-EPOCHS = 500
+EPOCHS = 50
 
-# Amazon stock market
-ticker = "AMZN"
-ticker_data_filename = os.path.join("data", f"{ticker}_{date_now}.csv")
+# Meta stock market
+ticker = "META"
+ticker_data_filename = os.path.join("p1/data", f"{ticker}_{date_now}.csv")
 # model name to save, making it as unique as possible based on parameters
 model_name = f"{date_now}_{ticker}-{shuffle_str}-{scale_str}-{split_by_date_str}-\
 {LOSS}-{OPTIMIZER}-{CELL.__name__}-seq-{N_STEPS}-step-{LOOKUP_STEP}-layers-{N_LAYERS}-units-{UNITS}"
 if BIDIRECTIONAL:
-    model_name += "-b"
+    model_name += "-b" 
