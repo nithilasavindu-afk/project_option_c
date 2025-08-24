@@ -3,7 +3,7 @@ from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import LSTM, Dense, Dropout, Bidirectional
 from sklearn import preprocessing
 from sklearn.model_selection import train_test_split
-from yahoo_fin import stock_info as si
+import yfinance as yf
 from collections import deque
 
 import numpy as np
@@ -27,25 +27,40 @@ def shuffle_in_unison(a, b):
 def load_data(ticker, n_steps=50, scale=True, shuffle=True, lookup_step=1, split_by_date=True,
                 test_size=0.2, feature_columns=['adjclose', 'volume', 'open', 'high', 'low']):
     """
-    Loads data from Yahoo Finance source, as well as scaling, shuffling, normalizing and splitting.
+    Loads and processes stock data for training, as well as scaling, shuffling, normalizing and splitting.
     Params:
-        ticker (str/pd.DataFrame): the ticker you want to load, examples include AAPL, TESL, etc.
+        ticker (str): the ticker symbol to load from yfinance, examples include AAPL, TSLA, etc.
         n_steps (int): the historical sequence length (i.e window size) used to predict, default is 50
         scale (bool): whether to scale prices from 0 to 1, default is True
         shuffle (bool): whether to shuffle the dataset (both training & testing), default is True
         lookup_step (int): the future lookup step to predict, default is 1 (e.g next day)
-        split_by_date (bool): whether we split the dataset into training/testing by date, setting it 
+        split_by_date (bool): whether we split the dataset into training/testing by date, setting it
             to False will split datasets in a random way
         test_size (float): ratio for test data, default is 0.2 (20% testing data)
-        feature_columns (list): the list of features to use to feed into the model, default is everything grabbed from yahoo_fin
+        feature_columns (list): the list of features to use to feed into the model, default is everything grabbed from yfinance
     """
-    # see if ticker is already a loaded stock from yahoo finance
+    # Load data using yfinance
     if isinstance(ticker, str):
-        # load it from yahoo_fin library
-        df = si.get_data(ticker)
+        print(f"Loading data for {ticker}...")
+        ticker_data = yf.download(ticker, period="5y")  # Download 5 years of data
+
+        # Handle MultiIndex columns if present
+        if isinstance(ticker_data.columns, pd.MultiIndex):
+            ticker_data.columns = ticker_data.columns.get_level_values(0)
+
+        # Convert column names to lowercase to match expected format
+        ticker_data.columns = [col.lower().replace(' ', '') for col in ticker_data.columns]
+        # Rename 'adjclose' if it's named differently
+        if 'adj close' in ticker_data.columns:
+            ticker_data.rename(columns={'adj close': 'adjclose'}, inplace=True)
+        elif 'adjclose' not in ticker_data.columns and 'close' in ticker_data.columns:
+            # If no adj close, use close as adjclose
+            ticker_data['adjclose'] = ticker_data['close']
+
+        df = ticker_data.copy()
     elif isinstance(ticker, pd.DataFrame):
         # already loaded, use it directly
-        df = ticker
+        df = ticker.copy()
     else:
         raise TypeError("ticker can be either a str or a `pd.DataFrame` instances")
 
@@ -145,9 +160,9 @@ def create_model(sequence_length, n_features, units=256, cell=LSTM, n_layers=2, 
         if i == 0:
             # first layer
             if bidirectional:
-                model.add(Bidirectional(cell(units, return_sequences=True), batch_input_shape=(None, sequence_length, n_features)))
+                model.add(Bidirectional(cell(units, return_sequences=True), input_shape=(sequence_length, n_features)))
             else:
-                model.add(cell(units, return_sequences=True, batch_input_shape=(None, sequence_length, n_features)))
+                model.add(cell(units, return_sequences=True, input_shape=(sequence_length, n_features)))
         elif i == n_layers - 1:
             # last layer
             if bidirectional:
@@ -165,3 +180,30 @@ def create_model(sequence_length, n_features, units=256, cell=LSTM, n_layers=2, 
     model.add(Dense(1, activation="linear"))
     model.compile(loss=loss, metrics=["mean_absolute_error"], optimizer=optimizer)
     return model
+
+
+def save_model(model, checkpoint_path):
+    """
+    Save the model to checkpoint.
+
+    Args:
+        model: Keras model to save
+        checkpoint_path: Path where to save the model
+    """
+    model.save(checkpoint_path)
+    print(f"Model saved to {checkpoint_path}")
+
+
+def load_model_from_checkpoint(checkpoint_path):
+    """
+    Load a saved model from checkpoint.
+
+    Args:
+        checkpoint_path: Path to the model checkpoint
+
+    Returns:
+        Loaded Keras model
+    """
+    return tf.keras.models.load_model(checkpoint_path)
+
+
