@@ -1,0 +1,44 @@
+{
+  "company": "META",
+  "price_col": "Close",
+  "train_start": "2020-01-01",
+  "train_end": "2023-08-01",
+  "seq_len": 60,
+  "split_method": "date",
+  "test_size": 0.2,
+  "model": "lstm",
+  "layers": 2,
+  "units": 64,
+  "dropout": 0.2,
+  "bidirectional": false,
+  "recurrent_dropout": 0.0,
+  "l2": 0.0,
+  "dense_units": 0,
+  "loss": "mse",
+  "optimizer": "adam",
+  "lr": 0.001,
+  "epochs": 15,
+  "batch_size": 32,
+  "early_stop": true,
+  "patience": 5,
+  "reduce_lr": true,
+  "grid": true,
+  "models": [
+    "lstm",
+    "gru",
+    "rnn"
+  ],
+  "layers_list": [
+    2,
+    3
+  ],
+  "units_list": [
+    32,
+    64
+  ],
+  "dropouts": [
+    0.1,
+    0.2
+  ],
+  "out_root": "task4_results"
+}
