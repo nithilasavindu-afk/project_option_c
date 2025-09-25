@@ -1,0 +1,21 @@
+Task 6: Ensemble Modeling Report
+========================================
+
+Individual Model Performance:
+------------------------------
+GRU:
+.4f.4f.2f
+LSTM:
+.4f.4f.2f
+RNN:
+.4f.4f.2f
+ENSEMBLE:
+.4f.4f.2f
+
+Ensemble Performance:
+--------------------
+.4f.4f.2f
+
+Conclusion:
+The ensemble combines predictions from LSTM, GRU, RNN, ARIMA, SARIMA, and Random Forest.
+Simple averaging is used to combine predictions, potentially improving accuracy over individual models.
