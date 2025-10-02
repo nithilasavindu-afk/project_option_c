@@ -1,0 +1,62 @@
+{
+  "baseline": {
+    "metrics": {
+      "accuracy": 0.5324074074074074,
+      "precision": 0.5714285714285714,
+      "recall": 0.576271186440678,
+      "f1_score": 0.5738396624472574,
+      "auc": 0.5057938429609132
+    },
+    "features_used": 17,
+    "feature_type": "technical_only",
+    "model_type": "random_forest"
+  },
+  "lstm": {
+    "metrics": {
+      "accuracy": 0.49074074074074076,
+      "precision": 0.5425531914893617,
+      "recall": 0.4322033898305085,
+      "f1_score": 0.4811320754716981,
+      "auc": 0.49792459356624
+    },
+    "features_used": 50,
+    "feature_type": "sentiment_enhanced",
+    "model_type": "deep_learning"
+  },
+  "gru": {
+    "metrics": {
+      "accuracy": 0.5,
+      "precision": 0.5454545454545454,
+      "recall": 0.5084745762711864,
+      "f1_score": 0.5263157894736842,
+      "auc": 0.487720511933587
+    },
+    "features_used": 50,
+    "feature_type": "sentiment_enhanced",
+    "model_type": "deep_learning"
+  },
+  "rnn": {
+    "metrics": {
+      "accuracy": 0.4722222222222222,
+      "precision": 0.5208333333333334,
+      "recall": 0.423728813559322,
+      "f1_score": 0.4672897196261682,
+      "auc": 0.4937737806987202
+    },
+    "features_used": 50,
+    "feature_type": "sentiment_enhanced",
+    "model_type": "deep_learning"
+  },
+  "ensemble": {
+    "metrics": {
+      "accuracy": 0.4675925925925926,
+      "precision": 0.5148514851485149,
+      "recall": 0.4406779661016949,
+      "f1_score": 0.4748858447488584,
+      "auc": 0.48201314424074715
+    },
+    "features_used": 50,
+    "feature_type": "sentiment_enhanced",
+    "model_type": "ensemble_dl"
+  }
+}

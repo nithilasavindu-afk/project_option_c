@@ -1,0 +1,13 @@
+{
+  "task6_prediction_feature": true,
+  "sentiment_features_count": 29,
+  "total_meta_features": 30,
+  "best_hyperparameters": {
+    "max_depth": 5,
+    "max_features": "log2",
+    "min_samples_leaf": 3,
+    "min_samples_split": 10,
+    "n_estimators": 100
+  },
+  "cv_best_score": 0.6098013715666418
+}

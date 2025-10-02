@@ -1,0 +1,81 @@
+Task 7 Data Integration Summary
+========================================
+
+Total records: 1078
+Date range: 2020-03-16 00:00:00 to 2024-06-28 00:00:00
+Columns: 77
+
+Stock price columns:
+  - Date
+  - open
+  - high
+  - low
+  - close
+  - volume
+
+Technical indicator columns:
+  - sma_5
+  - sma_10
+  - sma_20
+  - sma_50
+  - ema_12
+  - ema_26
+  - macd
+  - macd_signal
+  - macd_hist
+  - rsi_14
+  ... and 14 more
+
+Sentiment feature columns:
+  - avg_textblob_polarity
+  - std_textblob_polarity
+  - article_count
+  - avg_custom_polarity
+  - std_custom_polarity
+  - total_positive_words
+  - total_negative_words
+  - avg_article_length
+  - total_words
+  - sentiment_intensity
+  - sentiment_volatility
+  - pos_neg_ratio
+  - avg_textblob_polarity_lag_1
+  - avg_textblob_polarity_lag_2
+  - avg_textblob_polarity_lag_3
+  - std_textblob_polarity_lag_1
+  - std_textblob_polarity_lag_2
+  - std_textblob_polarity_lag_3
+  - avg_custom_polarity_lag_1
+  - avg_custom_polarity_lag_2
+  - avg_custom_polarity_lag_3
+  - std_custom_polarity_lag_1
+  - std_custom_polarity_lag_2
+  - std_custom_polarity_lag_3
+  - total_positive_words_lag_1
+  - total_positive_words_lag_2
+  - total_positive_words_lag_3
+  - total_negative_words_lag_1
+  - total_negative_words_lag_2
+  - total_negative_words_lag_3
+  - avg_article_length_lag_1
+  - avg_article_length_lag_2
+  - avg_article_length_lag_3
+  - total_words_lag_1
+  - total_words_lag_2
+  - total_words_lag_3
+  - sentiment_intensity_lag_1
+  - sentiment_intensity_lag_2
+  - sentiment_intensity_lag_3
+  - sentiment_volatility_lag_1
+  - sentiment_volatility_lag_2
+  - sentiment_volatility_lag_3
+  - pos_neg_ratio_lag_1
+  - pos_neg_ratio_lag_2
+  - pos_neg_ratio_lag_3
+
+Lagged feature columns:
+  - 33 lagged sentiment features
+
+Target columns:
+  - target_return
+  - target_direction

@@ -1,0 +1,15 @@
+{
+  "total_samples": 1078,
+  "train_samples": 862,
+  "test_samples": 215,
+  "features_count": 50,
+  "date_range": {
+    "start": "2020-03-16 00:00:00",
+    "end": "2024-06-28 00:00:00"
+  },
+  "class_distribution": {
+    "1": 561,
+    "0": 517
+  },
+  "split_method": "chronological_80_20"
+}
