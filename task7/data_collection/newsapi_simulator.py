@@ -12,6 +12,7 @@ import pandas as pd
 import requests
 from datetime import datetime, timedelta
 import time
+import os
 
 class NewsAPIClient:
     def __init__(self, api_key):
@@ -85,7 +86,7 @@ class NewsAPIClient:
 def main():
     """Main function to collect and save news data"""
     # Note: Replace with actual API key for real usage
-    API_KEY = "YOUR_NEWSAPI_KEY_HERE"
+    API_KEY = os.getenv('NEWSAPI_KEY', 'YOUR_NEWSAPI_KEY_HERE')
 
     print("Starting NewsAPI collection for META stock news...")
 

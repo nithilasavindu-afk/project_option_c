@@ -12,6 +12,7 @@ import pandas as pd
 import requests
 from datetime import datetime, timedelta
 import time
+import os
 
 class AlphaVantageNewsClient:
     def __init__(self, api_key):
@@ -90,7 +91,7 @@ class AlphaVantageNewsClient:
 def main():
     """Main function to collect and save news data"""
     # Note: Replace with actual API key for real usage
-    API_KEY = "YOUR_ALPHAVANTAGE_API_KEY_HERE"
+    API_KEY = os.getenv('ALPHAVANTAGE_API_KEY', 'YOUR_ALPHAVANTAGE_API_KEY_HERE')
 
     print("Starting Alpha Vantage News collection for META stock news...")
 
